@@ -1,9 +1,11 @@
+### A Vue 3 component for selecting addresses through multi-level dropdowns.
+
 ### Example address selector
 
 ```ts
 import AddressSelector from './components/AddressSelector.vue'
 
-const baseUrl = 'http://localhost:3000'
+const baseUrl = 'https://66be58a374dfc195586f3a53.mockapi.io/api/v1'
 
 const fetchOptions = async (parentId: number | null, query?: string) => {
   try {
@@ -58,36 +60,34 @@ const handleSelectedId = (id: number | null): void => {
 ```
 
 ```vue
-<template>
-  <el-row :gutter="20">
-    <el-col :span="8">
-      <el-text>View</el-text>
-      <AddressSelector
-          mode="view"
-          :initialId="3"
-          :fetchOptions="fetchOptions"
-          :fetchAncestry="fetchAncestry"
-      />
-    </el-col>
-    <el-col :span="8">
-      <el-text>Edit</el-text>
-      <AddressSelector
-          mode="edit"
-          :initialId="7"
-          :fetchOptions="fetchOptions"
-          :fetchAncestry="fetchAncestry"
-          @update:selectedId="handleSelectedId"
-      />
-    </el-col>
-    <el-col :span="8">
-      <el-text>Create</el-text>
-      <AddressSelector
-          mode="create"
-          :fetchOptions="fetchOptions"
-          :fetchAncestry="fetchAncestry"
-          @update:selectedId="handleSelectedId"
-      />
-    </el-col>
-  </el-row>
-</template>
+<el-row :gutter="20">
+  <el-col :span="8">
+    <el-text>View</el-text>
+    <AddressSelector
+      mode="view"
+      :initialId="3"
+      :fetchOptions="fetchOptions"
+      :fetchAncestry="fetchAncestry"
+    />
+  </el-col>
+  <el-col :span="8">
+    <el-text>Edit</el-text>
+    <AddressSelector
+      mode="edit"
+      :initialId="6"
+      :fetchOptions="fetchOptions"
+      :fetchAncestry="fetchAncestry"
+      @update:selectedId="handleSelectedId"
+    />
+  </el-col>
+  <el-col :span="8">
+    <el-text>Create</el-text>
+    <AddressSelector
+      mode="create"
+      :fetchOptions="fetchOptions"
+      :fetchAncestry="fetchAncestry"
+      @update:selectedId="handleSelectedId"
+    />
+</el-col>
+</el-row>
 ```

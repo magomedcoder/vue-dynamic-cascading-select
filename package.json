@@ -1,18 +1,49 @@
 {
   "name": "vue-address-selector",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "A Vue 3 component for selecting addresses through multi-level dropdowns.",
+  "main": "dist/vue-address-selector.umd.js",
+  "module": "dist/vue-address-selector.es.js",
+  "exports": {
+    ".": {
+      "import": "./dist/vue-address-selector.es.js",
+      "require": "./dist/vue-address-selector.umd.js"
+    }
+  },
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "vite build && npx tsc",
+    "publish": "npm publish"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/magomedcoder/vue-address-selector.git"
   },
+  "keywords": [
+    "vue",
+    "address",
+    "dropdown",
+    "multi-level",
+    "component"
+  ],
   "author": "Magomedcoder",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/magomedcoder/vue-address-selector/issues"
   },
-  "homepage": "https://github.com/magomedcoder/vue-address-selector#readme"
+  "homepage": "https://github.com/magomedcoder/vue-address-selector#readme",
+  "dependencies": {
+    "element-plus": "^2.8.0",
+    "vue": "^3.4.38"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.1.2",
+    "@vue/runtime-core": "^3.4.38",
+    "typescript": "^5.5.4",
+    "vite": "^5.4.1",
+    "vue-tsc": "^2.0.29"
+  }
 }
