@@ -1,7 +1,7 @@
 import { computed, ref } from 'vue'
-import type { Address } from './types'
+import type { Address, UseAddressSelectorEmit, UseAddressSelectorProps } from './types'
 
-export function useAddressSelector(props: any, emit: any) {
+export function useAddressSelector(props: UseAddressSelectorProps, emit: UseAddressSelectorEmit) {
   // Массив для хранения выбранных значений
   const treeIds = ref<(number | null)[]>([null])
   // Массив для хранения опций для каждого уровня
@@ -13,12 +13,12 @@ export function useAddressSelector(props: any, emit: any) {
   const isEditMode = computed(() => props.mode === 'edit')
   const isCreateMode = computed(() => props.mode === 'create')
 
-  // Функция для обработки изменений в el-select
+  // Обработчик изменения выбора
   const handleChange = async (index: number, value: number | null) => {
-    // В режиме просмотра изменения не допускаются
+    // В режиме просмотра изменение запрещено
     if (isViewMode.value) return
 
-    // Если значение очищено (null), возвращаем ID родителя
+    // Если выбор очищен, возвращаем ID родителя
     if (value === null || value == undefined) {
       const parentId = treeIds.value[index - 1] ?? null
       emit('update:selectedId', parentId)
@@ -26,25 +26,21 @@ export function useAddressSelector(props: any, emit: any) {
     }
 
     treeIds.value[index] = value
-
-    // Удаляем все последующие селекты, если есть
     treeIds.value = treeIds.value.slice(0, index + 1)
     options.value = options.value.slice(0, index + 1)
 
-    if (value != null) {
-      // Загружаем опции для следующего уровня
-      const nextOptions = await props.fetchOptions(value)
-      if (nextOptions.length > 0) {
-        treeIds.value.push(null)
-        options.value.push(nextOptions)
-      }
+    // Загрузка опций для следующего уровня, если они есть
+    const nextOptions = await props.fetchOptions(value)
+    if (nextOptions.length > 0) {
+      treeIds.value.push(null)
+      options.value.push(nextOptions)
     }
 
     // Эмитируем событие с ID выбранного элемента
     emit('update:selectedId', value != undefined ? value : null)
   }
 
-  // Функция для очистки выборок
+  // Обработчик очистки выбора
   const clearTree = (index: number) => {
     // В режиме просмотра изменения не допускаются
     if (isViewMode.value) return
@@ -54,7 +50,7 @@ export function useAddressSelector(props: any, emit: any) {
     options.value = options.value.slice(0, index + 1)
   }
 
-  // Функция поиска опций
+  // Функция для поиска опций по запросу
   const searchOptions = (index: number) => async (query: string) => {
     const parentId = index === 0 ? null : treeIds.value[index - 1]
     options.value[index] = await props.fetchOptions(parentId, query)
@@ -62,6 +58,7 @@ export function useAddressSelector(props: any, emit: any) {
 
   const initialize = async () => {
     if (props.initialId && (isEditMode.value || isViewMode.value)) {
+      // Загружаем всю цепочку родительских элементов при редактировании или просмотре
       const ancestry = await props.fetchAncestry(props.initialId)
       for (let i = 0; i < ancestry.length; i++) {
         treeIds.value[i] = ancestry[i].id
