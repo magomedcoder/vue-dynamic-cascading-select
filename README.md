@@ -84,7 +84,7 @@ const handleSelectedId = (id: number | null): void => {
 }
 
 const handleAddNew = (id: number | null): void => {
-  alert(id)
+  alert(id ?? 'parent')
 }
 ```
 
@@ -92,33 +92,33 @@ const handleAddNew = (id: number | null): void => {
 <el-row :gutter="20">
   <el-col :span="8">
     <el-text>View</el-text>
-    <DynamicCascadingSelect
+    <dynamic-cascading-select
       mode="view"
-      :initialId="3"
-      :fetchOptions="fetchOptions"
-      :fetchAncestry="fetchAncestry"
+      :initial-id="3"
+      :fetch-options="fetchOptions"
+      :fetch-ancestry="fetchAncestry"
     />
   </el-col>
   <el-col :span="8">
     <el-text>Edit</el-text>
-    <DynamicCascadingSelect
+    <dynamic-cascading-select
       mode="edit"
-      :initialId="6"
-      :fetchOptions="fetchOptions"
-      :fetchAncestry="fetchAncestry"
+      :initial-id="6"
+      :fetch-options="fetchOptions"
+      :fetch-ancestry="fetchAncestry"
       @update:selectedId="handleSelectedId"
-      @addNew="handleAddNew"
-      showAddButton
+      @add-new="handleAddNew"
+      show-add-button
     />
   </el-col>
   <el-col :span="8">
     <el-text>Create</el-text>
-    <DynamicCascadingSelect
+    <dynamic-cascading-select
       mode="create"
-      :fetchOptions="fetchOptions"
-      :fetchAncestry="fetchAncestry"
-      @update:selectedId="handleSelectedId"
-      @addNew="handleAddNew"
+      :fetch-options="fetchOptions"
+      :fetch-ancestry="fetchAncestry"
+      @update:selected-id="handleSelectedId"
+      @add-new="handleAddNew"
     />
   </el-col>
 </el-row>
