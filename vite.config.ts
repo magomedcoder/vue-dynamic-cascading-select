@@ -5,9 +5,10 @@ export default defineConfig({
   plugins: [vue()],
   build: {
     lib: {
-      entry: 'src/index.ts',
-      name: 'VueAddressSelector',
-      fileName: (format) => `vue-address-selector.${format}.js`,
+      name: 'DynamicCascadingSelect',
+      entry: './src/index.ts',
+      fileName: (format) => `index.${format}.js`,
+      formats: ['es']
     },
     rollupOptions: {
       external: [

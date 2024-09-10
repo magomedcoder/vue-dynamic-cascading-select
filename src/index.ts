@@ -1,10 +1,10 @@
 import { App } from 'vue'
-import AddressSelector from './AddressSelector.vue'
+import DynamicCascadingSelect from './DynamicCascadingSelect.vue'
 
-export { AddressSelector }
+export { DynamicCascadingSelect }
 
 export default {
   install(app: App) {
-    app.component('AddressSelector', AddressSelector)
+    app.component('DynamicCascadingSelect', DynamicCascadingSelect)
   }
 }

@@ -1,8 +1,9 @@
 {
   "compilerOptions": {
     "declaration": true,
+    "declarationDir": "./dist",
     "emitDeclarationOnly": true,
-    "outDir": "dist",
+    "outDir": "./dist",
     "module": "ESNext",
     "target": "ESNext",
     "esModuleInterop": true,
@@ -15,6 +16,7 @@
   ],
   "exclude": [
     "node_modules",
-    "dist"
+    "dist",
+    "src/useDynamicCascadingSelect.ts"
   ]
 }

@@ -1,4 +1,4 @@
-### A Vue 3 component for selecting addresses through multi-level dropdowns.
+### Vue 3 component for selecting addresses through multi-level dropdowns.
 
 #### Props
 
@@ -24,8 +24,17 @@ The component emits the following events:
 
 ### Example
 
+```bash
+# Yarn
+yarn add vue-dynamic-cascading-select
+
+# NPM
+npm install vue-dynamic-cascading-select --save
+```
+
 ```ts
-import AddressSelector from './components/AddressSelector.vue'
+import { DynamicCascadingSelect } from 'vue-dynamic-cascading-select'
+import 'vue-dynamic-cascading-select/dist/style.css'
 
 const baseUrl = 'https://66be58a374dfc195586f3a53.mockapi.io/api/v1'
 
@@ -33,7 +42,7 @@ const fetchOptions = async (parentId: number | null, query?: string) => {
   try {
     const url = new URL(`${baseUrl}/address`)
     if (parentId != null) {
-      url.searchParams.set('parent_id', parentId)
+      url.searchParams.set('parentId', parentId)
     }
     if (query != undefined) {
       url.searchParams.set('query', query)
@@ -61,7 +70,7 @@ const fetchAncestry = async (id: number) => {
       }
       const data = await res.json()
       ancestry.unshift(data)
-      currentId = data.parent_id
+      currentId = data.parentId
     } catch (error) {
       console.error(error)
       break
@@ -80,11 +89,10 @@ const handleAddNew = (id: number | null): void => {
 ```
 
 ```vue
-
 <el-row :gutter="20">
   <el-col :span="8">
     <el-text>View</el-text>
-    <AddressSelector
+    <DynamicCascadingSelect
       mode="view"
       :initialId="3"
       :fetchOptions="fetchOptions"
@@ -93,7 +101,7 @@ const handleAddNew = (id: number | null): void => {
   </el-col>
   <el-col :span="8">
     <el-text>Edit</el-text>
-    <AddressSelector
+    <DynamicCascadingSelect
       mode="edit"
       :initialId="6"
       :fetchOptions="fetchOptions"
@@ -105,7 +113,7 @@ const handleAddNew = (id: number | null): void => {
   </el-col>
   <el-col :span="8">
     <el-text>Create</el-text>
-    <AddressSelector
+    <DynamicCascadingSelect
       mode="create"
       :fetchOptions="fetchOptions"
       :fetchAncestry="fetchAncestry"

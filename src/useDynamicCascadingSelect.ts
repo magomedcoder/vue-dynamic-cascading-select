@@ -1,7 +1,7 @@
 import { computed, ref } from 'vue'
-import type { Address, UseAddressSelectorEmit, UseAddressSelectorProps } from './types'
+import type { Address, UseDynamicCascadingSelectEmit, UseDynamicCascadingSelectProps } from './types'
 
-export function useAddressSelector(props: UseAddressSelectorProps, emit: UseAddressSelectorEmit) {
+export function useDynamicCascadingSelect(props: UseDynamicCascadingSelectProps, emit: UseDynamicCascadingSelectEmit) {
   // Массив для хранения выбранных значений
   const treeIds = ref<(number | null)[]>([null])
   // Массив для хранения опций для каждого уровня
@@ -62,7 +62,7 @@ export function useAddressSelector(props: UseAddressSelectorProps, emit: UseAddr
       const ancestry = await props.fetchAncestry(props.initialId)
       for (let i = 0; i < ancestry.length; i++) {
         treeIds.value[i] = ancestry[i].id
-        options.value[i] = await props.fetchOptions(ancestry[i].parent_id)
+        options.value[i] = await props.fetchOptions(ancestry[i].parentId)
       }
 
       // Загружаем опции для последнего уровня

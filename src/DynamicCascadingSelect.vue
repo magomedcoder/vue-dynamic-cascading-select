@@ -1,7 +1,8 @@
 <script lang="ts" setup>
 import { onMounted } from 'vue'
 import type { Address } from './types'
-import { useAddressSelector } from './useAddressSelector'
+import { useDynamicCascadingSelect } from './useDynamicCascadingSelect'
+import { ElSelect, ElButton, ElOption } from 'element-plus'
 
 const props = defineProps<{
   initialId?: number | null
@@ -25,7 +26,7 @@ const {
   clearTree,
   searchOptions,
   initialize
-} = useAddressSelector(props, emit)
+} = useDynamicCascadingSelect(props, emit)
 
 const handleAddClick = (index: number | null) => {
   emit('addNew', index)
@@ -37,7 +38,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div class="address-selector">
+  <div class="dynamic-cascading-select">
     <div
       v-for="(treeId, index) in treeIds"
       :key="index"
@@ -84,7 +85,7 @@ onMounted(async () => {
 </template>
 
 <style scoped>
-.address-selector {
+.dynamic-cascading-select {
   padding: 10px;
   border: 1px solid #e4e7ed;
 }
