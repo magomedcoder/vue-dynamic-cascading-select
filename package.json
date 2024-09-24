@@ -1,6 +1,6 @@
 {
   "name": "vue-dynamic-cascading-select",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Vue 3 component for selecting addresses through multi-level dropdowns.",
   "main": "./dist/index.es.js",
   "module": "./dist/index.es.js",
@@ -31,14 +31,14 @@
   },
   "homepage": "https://github.com/magomedcoder/vue-dynamic-cascading-select#readme",
   "dependencies": {
-    "element-plus": "^2.8.0",
-    "vue": "^3.4.38"
+    "element-plus": "^2.8.3",
+    "vue": "^3.5.8"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^5.1.2",
-    "@vue/runtime-core": "^3.4.38",
-    "typescript": "^5.5.4",
-    "vite": "^5.4.1"
+    "@vitejs/plugin-vue": "^5.1.4",
+    "@vue/runtime-core": "^3.5.8",
+    "typescript": "^5.6.2",
+    "vite": "^5.4.7"
   },
   "peerDependencies": {
     "element-plus": "^2.8.0",
